@@ -1,0 +1,22 @@
+{% extends 'base_inicio.html' %}
+
+{% block title %} Página Inicial {% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio_style.css')}}">
+{% endblock %}
+
+{% block content %}
+<main class="container__pai">
+    <div class="container__pai__logo">
+        <img src="{{ url_for('static', filename='img/gameboy.png')}}" alt="imagem de um gameboy" class="imagem__filho__logo">
+    </div>
+    <div class="container__pai__titulo">
+        <h1 class="filho__titulo">Jogoteca</h1>
+        <p class="filho__titulo__paragrafo">Sua lista de jogos ao alcance das suas mãos</p>
+    </div>
+    <div class="container__pai__link">
+        <a href="{{url_for('login')}}" class="filho__link">Login</a>
+    </div>
+</main>
+{% endblock %}

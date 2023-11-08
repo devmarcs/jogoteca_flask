@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:ital,wght@0,600;1,700&family=Poppins:wght@300;400;500;700&display=swap');
+
+
+:root {
+    --cor-principal: #efefef;
+    --cor-secundaria: #6B6FDE;
+    --cor-preta: #000000;
+    --fonte-principal: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-principal);
+    font-family: var(--fonte-principal);
+}
+
+.container__pai__logo {
+    padding-top: 3em;
+    display: flex;
+    justify-content: center;
+}
+
+.imagem__filho__logo {
+    width: 300px;
+    height: 300px;
+}
+
+.container__pai__titulo {
+    padding-top: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filho__titulo {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 64px;
+}
+
+.container__pai__link {
+    padding-top: 3em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.filho__link {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    padding: 15px;
+    border: 2px solid var(--cor-preta) ;
+    align-items: center;
+    border-radius: 16px;
+    width: 125px;
+    text-decoration: none;
+    font-size: 18px;
+}
