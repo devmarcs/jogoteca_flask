@@ -14,8 +14,10 @@
             </ul>
         {% endif %}
     {% endwith %}
-<p class="text-right"><a href="{{url_for('cadastro')}}" class="btn btn-success">+Novo Cadastro</a></p>
     <div class="container">
+        <a href="{{url_for('cadastro')}}" class="btn btn-success">+Novo Cadastro</a>
+        <a href="{{url_for('logout')}}" class="btn btn-danger">Fazer Logout</a>
+    
         <div class="page-header">
             <h1>Jogoteca</h1>
         </div>
