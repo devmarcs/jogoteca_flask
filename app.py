@@ -1,18 +1,25 @@
 from flask import Flask, render_template,request, redirect,url_for, flash, session
-from models.usuarios import Usuario, usuario1, usuario2, usuario3, usuario4
+from flask_sqlalchemy import SQLAlchemy
 
-class Jogo():
-    def __init__(self, nome, categoria, console):
-        self.nome = nome
-        self.categoria = categoria
-        self.console = console
-
-jogo1 = Jogo('Tetris', 'Puzzle', 'Atari')
-jogo2 = Jogo('Clash Royale', 'Estratégia', 'Mobile')
-lista = [jogo1, jogo2]
 
 app = Flask(__name__)
 app.secret_key = 'marc123'
+db = SQLAlchemy()
+db.init_app(app)
+
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
+
+        SGBD= 'mysql+mysqlconnector',
+        usuario= 'root',
+        senha= '',
+        servidor= 'localhost',
+        database= 'jogoteca'
+    )
+
+
 
 @app.route('/')
 def index():
@@ -21,6 +28,8 @@ def index():
 
 @app.route('/jogos')
 def jogos():
+    from models.modelos import Jogos
+    lista = Jogos.query.order_by(Jogos.nome)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
     return render_template('lista.html',jogos= lista)
@@ -53,14 +62,9 @@ def login():
 
 @app.route('/autenticar', methods=['GET', 'POST'])
 def autenticar():
-    usuarios = {
-        usuario1.username : usuario1,
-        usuario2.username : usuario2,
-        usuario3.username : usuario3
-        }
-    
-    if request.form['usuario'] in usuarios:
-        usuario = usuarios[request.form['usuario']]
+    from models.modelos import Usuarios
+    usuario = Usuarios.query.filter_by(username=request.form['usuario']).first()
+    if usuario:
         if request.form['senha'] == usuario.senha:
             session['usuario_logado'] = usuario.username
             flash(f'{usuario.username}   logado com sucesso')
