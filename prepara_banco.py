@@ -43,9 +43,9 @@ TABLES['Jogos'] = ('''
 TABLES['Usuarios'] = ('''
     CREATE TABLE `jogoteca`.`usuarios` (      
       `nome` VARCHAR(50) NOT NULL UNIQUE,
-      `nickname` VARCHAR(10) NOT NULL,
+      `username` VARCHAR(10) NOT NULL,
       `senha` VARCHAR(100) NOT NULL,
-      PRIMARY KEY (`nickname`))
+      PRIMARY KEY (`username`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
     COLLATE = utf8_bin;  ''')
@@ -64,11 +64,12 @@ for tabela_nome in TABLES:
         print('ok')
 
 # inserindo usuários
-usuario_sql = 'INSERT INTO usuarios (nome, nickname, senha) values (%s,%s,%s)'
+usuario_sql = 'INSERT INTO usuarios (nome, username, senha) values (%s,%s,%s)'
 
 usuarios = [
+    ("marc", "mar", "123"),
     ("Luisandro", "L", "123"),
-    ("Dogão", "DOG", "321"),
+    ("Dogão", "DOG", "321")
 ]
 
 cursor.executemany(usuario_sql,usuarios)

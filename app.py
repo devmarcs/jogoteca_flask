@@ -4,10 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = 'marc123'
-db = SQLAlchemy()
-db.init_app(app)
-
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
@@ -18,8 +14,36 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
         servidor= 'localhost',
         database= 'jogoteca'
     )
+db = SQLAlchemy(app)
+
+class Jogos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50), nullable=False)
+    categoria = db.Column(db.String(40), nullable=False)
+    console = db.Column(db.String(20), nullable=False)
+
+    def __init__(self, nome, categoria, console):
+        self.nome = nome
+        self.categoria = categoria
+        self.console = console
+
+    def __repr__(self):
+        return '<Name %r>' % self.nome
+    
 
 
+class Usuarios(db.Model):
+    username = db.Column(db.String(8), primary_key=True)
+    nome = db.Column(db.String(20), nullable=False)
+    senha = db.Column(db.String(100), nullable=False)
+
+    def __init__(self,username, nome, senha):
+        self.username = username
+        self.nome = nome
+        self.senha = senha
+
+    def __repr__(self):
+        return '<Name %r>' % self.nome
 
 @app.route('/')
 def index():
@@ -28,8 +52,8 @@ def index():
 
 @app.route('/jogos')
 def jogos():
-    from models.modelos import Jogos
-    lista = Jogos.query.order_by(Jogos.nome)
+    
+    lista = Jogos.query.order_by(Jogos.id)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
     return render_template('lista.html',jogos= lista)
@@ -45,9 +69,6 @@ def criado():
     nome = request.form['nome']
     categoria = request.form['categoria']
     console = request.form['console']
-
-    jogo = Jogo(nome, categoria, console)
-    lista.append(jogo)
     flash('Jogo cadastrado com sucesso!')
     return redirect(url_for('jogos'))
    
@@ -60,9 +81,9 @@ def login():
 
 
 
-@app.route('/autenticar', methods=['GET', 'POST'])
+@app.route('/autenticar', methods=['POST',])
 def autenticar():
-    from models.modelos import Usuarios
+
     usuario = Usuarios.query.filter_by(username=request.form['usuario']).first()
     if usuario:
         if request.form['senha'] == usuario.senha:
