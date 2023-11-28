@@ -1,6 +1,6 @@
 from flask import render_template,request, redirect,url_for, flash, session
 from app import app, db
-
+from models.modelos import Usuarios, Jogos
 
 @app.route('/')
 def index():
@@ -9,7 +9,7 @@ def index():
 
 @app.route('/jogos')
 def jogos():
-    from models.modelos import Jogos
+    
     lista = Jogos.query.order_by(Jogos.id)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
@@ -23,7 +23,7 @@ def cadastro():
 
 @app.route('/criar', methods= ['POST'])
 def criado():
-    from models.modelos import Jogos
+   
     nome = request.form['nome']
     categoria = request.form['categoria']
     console = request.form['console']
@@ -41,6 +41,24 @@ def criado():
     return redirect(url_for('jogos'))
    
 
+@app.route('/editar_jogo/<int:id>')
+def editar_jogo(id):
+    
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('editar_jogo')))
+    jogo = Jogos.query.filter_by(id=id).first()
+    return render_template('editar_jogo.html',jogo= jogo)
+
+@app.route('/atualizar', methods= ['POST']) 
+def atualizar():
+    jogo = Jogos.query.filter_by(id=request.form['id']).first()
+    jogo.nome = request.form['nome']
+    jogo.categoria = request.form['categoria']
+    jogo.console = request.form['console']
+
+    db.session.add(jogo)
+    db.session.commit()
+    return redirect(url_for('jogos'))
 
 @app.route('/login')
 def login():
@@ -51,7 +69,7 @@ def login():
 
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
-    from models.modelos import Usuarios
+    
     usuario = Usuarios.query.filter_by(username=request.form['usuario']).first()
     if usuario:
         if request.form['senha'] == usuario.senha:
