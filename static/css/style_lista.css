@@ -18,37 +18,25 @@ body {
     background-color: var(--cor-principal);
 }
 
-
-.titulo__login {
-    text-align: center;
-    padding: 3em 0 0 0;
-}
-
-
-.container__pai {
-    padding-top: 1.5em;
-    display: flex;
-    justify-content: center;
-    
-}
-
-
-.containner__pai__logo {
-    padding-top: 1.5em;
-    display: flex;
-    justify-content: center;
-}
-
-.imagem__filho__logo {
-    width: 120px;
-    height: 120px;
-}
-
-
 .btns {
     background-color: var(--cor-secundaria);
-    width: 100%;
-    color: var(--cor-principal);
-    font-size: 18px;
+}
+
+.pai__tit {
+    display: flex;
+    justify-content: center;
+    padding: 2.5em 0 1.5em 0;
+}
+
+.tit__principal {
+    font-size: 48px;
     font-weight: 500;
+}
+
+.pai__botoes {
+    display: flex;
+    justify-content: center;
+    gap: 7em;
+    padding: 2.5em 0 0 0;
+
 }

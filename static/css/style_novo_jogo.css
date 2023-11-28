@@ -17,13 +17,10 @@
 body {
     background-color: var(--cor-principal);
 }
-
-
-.titulo__login {
-    text-align: center;
-    padding: 3em 0 0 0;
+.container__pai__logo {
+    display: flex;
+    justify-content: center;
 }
-
 
 .container__pai {
     padding-top: 1.5em;
@@ -32,23 +29,23 @@ body {
     
 }
 
-
-.containner__pai__logo {
-    padding-top: 1.5em;
+.container__pai__titulo {
+    font-family: var(--fonte-inter);
+    padding: 1em 0em;
     display: flex;
     justify-content: center;
 }
 
-.imagem__filho__logo {
-    width: 120px;
-    height: 120px;
+.logo {
+    width: 200px;
 }
 
+.pai__botoes {
+    padding: 1.5em 12em;
+    display: flex;
+    justify-content: space-around;
+}
 
 .btns {
     background-color: var(--cor-secundaria);
-    width: 100%;
-    color: var(--cor-principal);
-    font-size: 18px;
-    font-weight: 500;
 }

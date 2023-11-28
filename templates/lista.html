@@ -2,6 +2,10 @@
 
 {% block title %} Cadastro de Jogos {% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_lista.css')}}">
+{% endblock %}
+
 {% block content %}
 <h3 class="text-center text-muted mb-3"></h3>
 
@@ -15,13 +19,12 @@
         {% endif %}
     {% endwith %}
     <div class="container">
-        <a href="{{url_for('cadastro')}}" class="btn btn-success">+Novo Cadastro</a>
-        <a href="{{url_for('logout')}}" class="btn btn-danger">Fazer Logout</a>
+        
     
-        <div class="page-header">
-            <h1>Jogoteca</h1>
+        <div class="page-header pai__tit">
+            <h1 class="tit__principal">Jogoteca</h1>
         </div>
-        <table class="table table-striped table-responsive table-bordered">
+        <table class="table table-striped table-responsive table-bordered ">
             <thead class="thead-default">
                 <tr>
                     <th>Nome do jogo</th>
@@ -39,5 +42,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="pai__botoes">
+            <a href="{{url_for('cadastro')}}" class="btns btn btn-info text-white border border-light ">+Novo Cadastro</a>
+            <a href="{{url_for('logout')}}" class="btn btn-danger">Fazer Logout</a>
+        </div>
     </div>
 {% endblock %}

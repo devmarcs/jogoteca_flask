@@ -19,9 +19,13 @@
             </ul>
         {% endif %}
     {% endwith %}
-    <h1 class="titulo__login">Login de Usuário</h1>
+    <h1 class="titulo__login">LOGIN DE USUÁRIO</h1>
+    <div class="containner__pai__logo">
+        <img src="{{ url_for('static', filename='img/gameboy.png')}}" alt="imagem de um gameboy" class="imagem__filho__logo">
+    </div>
     <div class="container__pai">
         
+
         <form  method="POST" action="{{ url_for('autenticar') }}">
             <div class="form-group col-12">
                 <input type="hidden" name="proxima" value="{{ proxima }}">
@@ -33,7 +37,7 @@
                 <input class="form-control" type="password" name="senha" required>
             </div>
             <br>
-            <button class="btn btn-primary btns" type="submit">Entrar</button>
+            <button class="btn btn-info btns" type="submit">Entrar</button>
         </form>
     </div>
 </div>

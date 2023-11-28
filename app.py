@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request, redirect,url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
 app.secret_key = 'marc123'
 
@@ -14,36 +13,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
         servidor= 'localhost',
         database= 'jogoteca'
     )
+
+
+
 db = SQLAlchemy(app)
 
-class Jogos(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(50), nullable=False)
-    categoria = db.Column(db.String(40), nullable=False)
-    console = db.Column(db.String(20), nullable=False)
 
-    def __init__(self, nome, categoria, console):
-        self.nome = nome
-        self.categoria = categoria
-        self.console = console
 
-    def __repr__(self):
-        return '<Name %r>' % self.nome
     
 
 
-class Usuarios(db.Model):
-    username = db.Column(db.String(8), primary_key=True)
-    nome = db.Column(db.String(20), nullable=False)
-    senha = db.Column(db.String(100), nullable=False)
 
-    def __init__(self,username, nome, senha):
-        self.username = username
-        self.nome = nome
-        self.senha = senha
-
-    def __repr__(self):
-        return '<Name %r>' % self.nome
 
 @app.route('/')
 def index():
@@ -69,6 +49,16 @@ def criado():
     nome = request.form['nome']
     categoria = request.form['categoria']
     console = request.form['console']
+
+    jogo = Jogos.query.filter_by(nome=nome).first()
+    if jogo:
+        flash('Jogo já cadastrado no sistema!')
+        return redirect(url_for('jogos'))
+    
+    novo_jogo = Jogos(nome=nome, categoria=categoria, console=console) 
+    db.session.add(novo_jogo)
+    db.session.commit()
+
     flash('Jogo cadastrado com sucesso!')
     return redirect(url_for('jogos'))
    
@@ -83,7 +73,6 @@ def login():
 
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
-
     usuario = Usuarios.query.filter_by(username=request.form['usuario']).first()
     if usuario:
         if request.form['senha'] == usuario.senha:
