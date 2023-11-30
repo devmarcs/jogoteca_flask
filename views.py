@@ -7,7 +7,7 @@ def index():
     return render_template('inicio.html')
 
 
-@app.route('/jogos')
+@app.route('/jogos' )
 def jogos():
     
     lista = Jogos.query.order_by(Jogos.id)
@@ -69,8 +69,8 @@ def login():
 
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
-    
-    usuario = Usuarios.query.filter_by(username=request.form['usuario']).first()
+    nome_usuario = request.form['usuario']
+    usuario = Usuarios.query.filter_by(username=nome_usuario).first()
     if usuario:
         if request.form['senha'] == usuario.senha:
             session['usuario_logado'] = usuario.username

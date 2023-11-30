@@ -18,9 +18,10 @@ body {
     background-color: var(--cor-principal);
 }
 
-.btns {
-    background-color: var(--cor-secundaria);
+.tabela {
+    text-align: center;
 }
+
 
 .pai__tit {
     display: flex;
@@ -40,3 +41,11 @@ body {
     padding: 2.5em 0 0 0;
 
 }
+
+
+.btns {
+    
+    width: 150px;
+    padding: 5px;
+}
+

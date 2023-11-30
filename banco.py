@@ -1,6 +1,4 @@
 
 
-from app import app
-
 
 

@@ -1,4 +1,4 @@
-import mysql.connector 
+import mysql.connector
 from mysql.connector import errorcode
 
 print('Conectando...')
@@ -6,10 +6,9 @@ print('Conectando...')
 try:
     conn = mysql.connector.connect(
         host='127.0.0.1',
-        user='root',
-        password=''
+        user='marcelo',
+        password='admin'
     )
-    
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print('Existe algo errado no nome de usuário ou senha')
@@ -17,59 +16,56 @@ except mysql.connector.Error as err:
         print(err)
 else:
     print('Conectado')
+    cursor = conn.cursor()
 
+    cursor.execute("DROP DATABASE IF EXISTS jogoteca;")
+    cursor.execute("CREATE DATABASE jogoteca;")
+    cursor.execute("USE jogoteca")
 
-cursor = conn.cursor()
-cursor.execute("DROP DATABASE IF EXISTS jogoteca;")
+    # criando tabelas
+    TABLES = {}
 
-cursor.execute("CREATE DATABASE jogoteca;")
+    TABLES['Jogos'] = ('''
+        CREATE TABLE `jogoteca`.`jogos` (
+          `id` INT NOT NULL AUTO_INCREMENT,
+          `nome` VARCHAR(50) NOT NULL,
+          `categoria` VARCHAR(40) NOT NULL,
+          `console` VARCHAR(20) NOT NULL,
+          PRIMARY KEY (`id`))
+        ENGINE = InnoDB
+        DEFAULT CHARACTER SET = utf8
+        COLLATE = utf8_bin; ''')
 
-cursor.execute("USE jogoteca")
+    TABLES['Usuarios'] = ('''
+        CREATE TABLE `jogoteca`.`usuarios` (      
+          `nome` VARCHAR(50) NOT NULL,
+          `username` VARCHAR(10) NOT NULL,
+          `senha` VARCHAR(100) NOT NULL,
+          PRIMARY KEY (`username`))
+        ENGINE = InnoDB
+        DEFAULT CHARACTER SET = utf8
+        COLLATE = utf8_bin;  ''')
 
-# criando tabelas
-TABLES = {}
-
-TABLES['Jogos'] = ('''
-    CREATE TABLE `jogoteca`.`jogos` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `nome` VARCHAR(50) NOT NULL UNIQUE,
-      `categoria` VARCHAR(40) NOT NULL,
-      `console` VARCHAR(20) NOT NULL,
-      PRIMARY KEY (`id`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
-    COLLATE = utf8_bin; ''')
-
-TABLES['Usuarios'] = ('''
-    CREATE TABLE `jogoteca`.`usuarios` (      
-      `nome` VARCHAR(50) NOT NULL UNIQUE,
-      `username` VARCHAR(10) NOT NULL,
-      `senha` VARCHAR(100) NOT NULL,
-      PRIMARY KEY (`username`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
-    COLLATE = utf8_bin;  ''')
-
-for tabela_nome in TABLES:
-    tabela_sql = TABLES[tabela_nome]
-    try:
-        print(f'Criando tabela {tabela_nome}')
-        cursor.execute(tabela_sql)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-            print('Tabela já existe')
+    for tabela_nome in TABLES:
+        tabela_sql = TABLES[tabela_nome]
+        try:
+            print(f'Criando tabela {tabela_nome}')
+            cursor.execute(tabela_sql)
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                print('Tabela já existe')
+            else:
+                print(err.msg)
         else:
-            print(err.msg)
-    else:
-        print('ok')
+            print('ok')
 
 # inserindo usuários
 usuario_sql = 'INSERT INTO usuarios (nome, username, senha) values (%s,%s,%s)'
 
 usuarios = [
-    ("marc", "mar", "123"),
     ("Luisandro", "L", "123"),
-    ("Dogão", "DOG", "321")
+    ("Dogão", "DOG", "321"),
+    ("Marcelo", "marc", "1402"),
 ]
 
 cursor.executemany(usuario_sql,usuarios)
@@ -87,6 +83,7 @@ jogos = [
     ("God of War", "Hack and Slash", "PS2"),
     ("Mortal Kombat I", "Luta", "PS2"),
     ("Need for Speed", "HCorrida", "PC"),
+    ("Clash Royale", "Estratégia", "Mobile"),
 ]
 
 cursor.executemany(jogo_sql,jogos)

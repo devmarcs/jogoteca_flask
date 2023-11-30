@@ -8,30 +8,30 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-5 mx-auto">
+    <div class="col- mx-auto col-6">
         <div class="container__pai__logo">
             <img class="logo" src="{{ url_for('static', filename='img/controle.png')}}" id="logo" alt="">
         </div>
         <div class="container__pai__titulo">
             <h3 class="titulo__pag">Cadastro de Jogos</h3>
         </div>
-            <form class="flex-lg-row" method="post" action="{{url_for('criado')}}">
-                <div class="form-group col-10">
+            <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('criado')}}">
+                <div class="form-group">
                     <label for="">Nome do Jogo</label>
                     <input type="text" name="nome" id="" required class="form-control">
                 </div>
-                <div class="form-group col-10">
+                <div class="form-group">
                     <label for="">Categoria</label>
                     <input type="text" name="categoria" id="" required class="form-control">
                 </div>
-                <div class="form-group col-10">
+                <div class="form-group">
                     <label for="">Console</label>
                     <input type="text" name="console" id="" required class="form-control">
                 </div>
                 <br>
-                <div class="pai__botoes">
-                    <input type="submit" value="Adicionar" class="btn btn-info text-white btns my-2 my-sm-0 ">
-                    <a class="btn btn-dark text-white  my-2 my-sm-0" href="{{ url_for('jogos') }}">Voltar</a>
+                <div class="pai__botoes d-flex justify-content-around">
+                    <button type="submit" class="btn bg-info text-white btns my-2 my-sm-0  btns">Adicionar</button>
+                    <a class="btn bg-dark text-white my-2 my-sm-0 btns" href="{{ url_for('jogos') }}">Voltar</a>
                 </div>
             </form>
     </div>

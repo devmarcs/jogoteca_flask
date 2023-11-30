@@ -22,9 +22,9 @@
         
     
         <div class="page-header pai__tit">
-            <h1 class="tit__principal">Jogoteca</h1>
+            <h1 class="tit__principal">Bem vindo a Jogoteca</h1>
         </div>
-        <table class="table table-striped table-responsive table-bordered ">
+        <table class="table table-striped table-responsive table-bordered tabela ">
             <thead class="thead-default">
                 <tr>
                     <th>Nome do jogo</th>
@@ -45,8 +45,8 @@
             </tbody>
         </table>
         <div class="pai__botoes">
-            <a href="{{url_for('cadastro')}}" class="btns btn btn-info text-white border border-light ">+Novo Cadastro</a>
-            <a href="{{url_for('logout')}}" class="btn btn-danger">Fazer Logout</a>
+            <a href="{{url_for('cadastro')}}" class="btns btn bg-info text-white border border-light ">Novo Cadastro</a>
+            <a href="{{url_for('logout')}}" class="btn btn-dark btns">Fazer Logout</a>
         </div>
     </div>
 {% endblock %}
