@@ -6,7 +6,7 @@ from models.modelos import Usuarios, Jogos
 def index():
     return render_template('inicio.html')
 
-
+#===== Tela lista de jogos =====
 @app.route('/jogos' )
 def jogos():
     
@@ -20,7 +20,7 @@ def cadastro():
     return render_template('novo_jogo.html')
 
 
-
+#===== Tela de criar jogos =====
 @app.route('/criar', methods= ['POST'])
 def criado():
    
@@ -40,7 +40,7 @@ def criado():
     flash('Jogo cadastrado com sucesso!')
     return redirect(url_for('jogos'))
    
-
+#===== Tela editar jogos =====
 @app.route('/editar_jogo/<int:id>')
 def editar_jogo(id):
     
@@ -49,6 +49,7 @@ def editar_jogo(id):
     jogo = Jogos.query.filter_by(id=id).first()
     return render_template('editar_jogo.html',jogo= jogo)
 
+#===== Função que faz a edição dos jogos =====
 @app.route('/atualizar', methods= ['POST']) 
 def atualizar():
     jogo = Jogos.query.filter_by(id=request.form['id']).first()
@@ -60,13 +61,21 @@ def atualizar():
     db.session.commit()
     return redirect(url_for('jogos'))
 
+
+#===== Função que deleta os jogos =====
+@app.route('/deletar_jogo/<int:id>')
+def deletar_jogo():
+    pass
+
+
+#===== Tela de login do usuário =====
 @app.route('/login')
 def login():
     proxima = request.args.get('proxima')
     return render_template('login.html', proxima=proxima)
 
 
-
+#===== Função que verifica a autetticação do usuário =====
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
     nome_usuario = request.form['usuario']
@@ -80,7 +89,7 @@ def autenticar():
     flash('Usuário não logado')
     return redirect(url_for(proxima_pagina))
        
-
+#===== Função que faz o logout da sessão do usuário =====
 @app.route('/logout')
 def logout():
     session['usuario_logado'] = None

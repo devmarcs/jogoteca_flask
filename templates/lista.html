@@ -39,7 +39,10 @@
                         <td>{{jogo.nome}}</td>
                         <td>{{jogo.categoria}}</td>
                         <td>{{jogo.console}}</td>
-                        <td><a class="btn btn-primary" href="{{ url_for('editar_jogo', id=jogo.id) }}">Editar</a></td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ url_for('editar_jogo', id=jogo.id) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ url_for('deletar_jogo', id=jogo.id) }}">Excluir</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
