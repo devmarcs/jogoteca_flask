@@ -10,12 +10,25 @@
 <div class="row">
     <div class="col- mx-auto col-6">
         <div class="container__pai__logo">
-            <img class="logo" src="{{ url_for('static', filename='img/controle.png')}}" id="logo" alt="">
+            <img class="logo " src="{{ url_for('static', filename='img/controle.png')}}" id="logo" alt="">
         </div>
         <div class="container__pai__titulo">
             <h3 class="titulo__pag">Cadastro de Jogos</h3>
         </div>
+
             <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('criado')}}" enctype="multipart/form-data">
+
+                <figure class="img-thumbnail col-md-4">
+                    <img class="img__capa img-fluid" src="{{ url_for('imagem', nome_arquivo='capa_padrao.png') }}" alt="">
+                    <figcaption>
+                        <label for="">
+                            Mudar Capa
+                            <div class="form-group">
+                                <input type="file" name="arquivo" id="arquivo" accept=".jpg" required class="form-control">
+                            </div>
+                        </label>
+                    </figcaption>
+                </figure>
                 <div class="form-group">
                     <label for="">Nome do Jogo</label>
                     <input type="text" name="nome" id="" required class="form-control">
@@ -28,9 +41,7 @@
                     <label for="">Console</label>
                     <input type="text" name="console" id="" required class="form-control">
                 </div>
-                <div class="form-group">
-                    <input type="file" name="arquivo" id="arquivo" accept=".jpg" required class="form-control">
-                </div>
+                
                 <br>
                 <div class="pai__botoes d-flex justify-content-around">
                     <button type="submit" class="btn bg-info text-white btns my-2 my-sm-0  btns">Adicionar</button>

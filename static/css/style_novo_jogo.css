@@ -17,6 +17,8 @@
 body {
     background-color: var(--cor-principal);
 }
+
+
 .container__pai__logo {
     display: flex;
     justify-content: center;
@@ -36,8 +38,16 @@ body {
     justify-content: center;
 }
 
+.titulo__pag {
+    font-size: 4em;
+}
+
 .logo {
     width: 200px;
+}
+
+.img__capa {
+    width: 220px;
 }
 
 #arquivo {

@@ -1,4 +1,4 @@
-from flask import render_template,request, redirect,url_for, flash, session
+from flask import render_template,request, redirect,url_for, flash, session, send_from_directory
 from app import app, db
 from models.modelos import Usuarios, Jogos
 
@@ -110,3 +110,8 @@ def logout():
 def verificação(rota):
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for(rota)))
+    
+
+@app.route('/uploads/<nome_arquivo>')
+def imagem(nome_arquivo):
+    return send_from_directory('uploads', nome_arquivo)
