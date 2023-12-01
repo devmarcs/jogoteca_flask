@@ -1,3 +1,4 @@
+import os
 
 SECRET_KEY = 'marc123'
 
@@ -10,3 +11,5 @@ SQLALCHEMY_DATABASE_URI = \
         servidor= 'localhost',
         database= 'jogoteca'
     )
+
+UPLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + '/uploads'

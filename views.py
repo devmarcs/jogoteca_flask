@@ -37,6 +37,10 @@ def criado():
     db.session.add(novo_jogo)
     db.session.commit()
 
+    arquivo = request.files['arquivo']
+    upload_path = app.config['UPLOAD_PATH']
+    arquivo.save(f'{upload_path}/capa{novo_jogo.id}.jpg')
+
     flash('Jogo cadastrado com sucesso!')
     return redirect(url_for('jogos'))
    
@@ -44,8 +48,7 @@ def criado():
 @app.route('/editar_jogo/<int:id>')
 def editar_jogo(id):
     
-    if 'usuario_logado' not in session or session['usuario_logado'] == None:
-        return redirect(url_for('login', proxima=url_for('editar_jogo')))
+    verificação('editar_jogo')
     jogo = Jogos.query.filter_by(id=id).first()
     return render_template('editar_jogo.html',jogo= jogo)
 
@@ -64,8 +67,15 @@ def atualizar():
 
 #===== Função que deleta os jogos =====
 @app.route('/deletar_jogo/<int:id>')
-def deletar_jogo():
-    pass
+def deletar_jogo(id):
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login'))
+    
+    Jogos.query.filter_by(id=id).delete()
+    db.session.commit()
+    flash('Jogo deletado com sucesso!')
+    return redirect(url_for('jogos'))
+
 
 
 #===== Tela de login do usuário =====
@@ -95,3 +105,8 @@ def logout():
     session['usuario_logado'] = None
     flash('Usuário deslogado com sucesso!')
     return redirect(url_for('index'))
+
+
+def verificação(rota):
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for(rota)))

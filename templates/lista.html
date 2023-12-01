@@ -24,7 +24,7 @@
         <div class="page-header pai__tit">
             <h1 class="tit__principal">Bem vindo a Jogoteca</h1>
         </div>
-        <table class="table table-striped table-responsive table-bordered tabela ">
+        <table class="table table-dark table-striped table-responsive table-bordered tabela ">
             <thead class="thead-default">
                 <tr>
                     <th>Nome do jogo</th>
@@ -40,8 +40,8 @@
                         <td>{{jogo.categoria}}</td>
                         <td>{{jogo.console}}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ url_for('editar_jogo', id=jogo.id) }}">Editar</a>
-                            <a class="btn btn-primary" href="{{ url_for('deletar_jogo', id=jogo.id) }}">Excluir</a>
+                            <a class="btn btn-primary bts"  href="{{ url_for('editar_jogo', id=jogo.id) }}">Editar</a>
+                            <a class="btn btn-danger bts" href="{{ url_for('deletar_jogo', id=jogo.id) }}">Excluir</a>
                         </td>
                     </tr>
                 {% endfor %}

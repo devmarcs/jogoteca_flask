@@ -15,7 +15,7 @@
         <div class="container__pai__titulo">
             <h3 class="titulo__pag">Cadastro de Jogos</h3>
         </div>
-            <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('criado')}}">
+            <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('criado')}}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="">Nome do Jogo</label>
                     <input type="text" name="nome" id="" required class="form-control">
@@ -27,6 +27,9 @@
                 <div class="form-group">
                     <label for="">Console</label>
                     <input type="text" name="console" id="" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="arquivo" id="arquivo" accept=".jpg" required class="form-control">
                 </div>
                 <br>
                 <div class="pai__botoes d-flex justify-content-around">
