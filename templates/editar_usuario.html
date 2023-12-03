@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %} Edição de Jogo {% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_novo_jogo.css')}}">
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+                <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+<div class="row">
+    <div class="col-6 mx-auto">
+        <div class="container__pai__logo">
+            <img class="logo" src="{{ url_for('static', filename='img/editar.png')}}" id="logo" alt="">
+        </div>
+        <div class="container__pai__titulo">
+            <h3 class="titulo__pag">Edição do Usuário: {{ usuario.username }}</h3>
+        </div>
+            <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('atualizar_user', id=usuario.id)}}">
+                <input type="hidden" name="id" value="{{usuario.id}}">
+                <div class="form-group">
+                    <label for="">Nome do Usuário:</label>
+                    <input type="text" name="nome" id="nome" required class="form-control" value="{{usuario.nome}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Username:</label>
+                    <input type="text" name="username" id="name" required class="form-control" value="{{usuario.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Senha:</label>
+                    <input type="text" name="senha" id="senha" required class="form-control" value="{{usuario.senha}}">
+                </div>
+                <br>
+                <div class="pai__botoes d-flex justify-content-around">
+                    <button type="submit" class="btn bg-info text-white btns my-2 my-sm-0  btns">Salvar</button>
+                    <a class="btn bg-dark text-white my-2 my-sm-0 btns" href="{{ url_for('jogos') }}">Voltar</a>
+                </div>
+            </form>
+    </div>
+</div>
+{% endblock %}

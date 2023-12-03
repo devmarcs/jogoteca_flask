@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Meus dados Cadastrais {% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_lista.css')}}">
+{% endblock %}
+
+{% block content %}
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+                <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        
+    
+        <div class="page-header pai__tit">
+            <h1 class="tit__principal">Dados do usuário {{usuario.nome}}</h1>
+        </div>
+        <table class="table table-dark table-striped table-responsive table-bordered tabela ">
+            <thead class="thead-default">
+                <tr>
+                    <th>Nome</th>
+                    <th>Username</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jogo in jogos %}
+                    <tr>
+                        <td>{{usuario.nome}}</td>
+                        <td>{{usuario.username}}</td>
+                        <td>
+                            <a class="btn btn-primary bts"  href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
+                            <a class="btn btn-danger bts" href="{{ url_for('deletar_usuario', id=usuario.id) }}">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pai__botoes">
+            <a href="{{ url_for('deletar_usuario', id=usuario.id) }}" class="btns btn bg-info text-white border border-light ">Excluir Conta</a>
+            <a href="{{url_for('editar_usuario', id=usuario.id)}}" class="btn btn-dark btns">Editar Usuário</a>
+            <a href="{{url_for('logout')}}" class="btn btn-dark btns">Fazer Logout</a>
+        </div>
+    </div>
+{% endblock %}

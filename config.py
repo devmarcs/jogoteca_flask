@@ -13,3 +13,4 @@ SQLALCHEMY_DATABASE_URI = \
     )
 
 UPLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + '/uploads'
+UPLOAD_PATH_USER = os.path.dirname(os.path.abspath(__file__)) + '/uploadsUser'

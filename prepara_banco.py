@@ -37,11 +37,12 @@ else:
         COLLATE = utf8_bin; ''')
 
     TABLES['Usuarios'] = ('''
-        CREATE TABLE `jogoteca`.`usuarios` (      
-          `nome` VARCHAR(50) NOT NULL,
-          `username` VARCHAR(10) NOT NULL,
-          `senha` VARCHAR(100) NOT NULL,
-          PRIMARY KEY (`username`))
+        CREATE TABLE `jogoteca`.`usuarios` ( 
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `nome` VARCHAR(50) NOT NULL,
+            `username` VARCHAR(10) NOT NULL,
+             `senha` VARCHAR(100) NOT NULL,
+          PRIMARY KEY (`id`))
         ENGINE = InnoDB
         DEFAULT CHARACTER SET = utf8
         COLLATE = utf8_bin;  ''')
@@ -73,7 +74,7 @@ cursor.executemany(usuario_sql,usuarios)
 cursor.execute('select * from jogoteca.usuarios')
 print('---------------- Usuários ----------------')
 for user in cursor.fetchall():
-    print(user[0])
+    print(user[1])
 
 # inserindo jogos
 jogo_sql = 'INSERT INTO jogos (nome, categoria, console) values (%s,%s,%s)'

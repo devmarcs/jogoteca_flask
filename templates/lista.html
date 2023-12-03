@@ -48,8 +48,10 @@
             </tbody>
         </table>
         <div class="pai__botoes">
-            <a href="{{url_for('cadastro')}}" class="btns btn bg-info text-white border border-light ">Novo Cadastro</a>
-            <a href="{{url_for('logout')}}" class="btn btn-dark btns">Fazer Logout</a>
+            <a href="{{url_for('cadastro')}}" class="btns btn btn-info text-white border border-light ">Novo Jogo</a>
+            <a href="{{url_for('cadastro')}}" class="btns btn btn-info text-white border border-light ">Meus Dados</a>
+            <a href="{{url_for('editar_usuario', id=usuario.id)}}" class="btn btn-info text-white btns">Editar Usuário</a>
+            <a href="{{url_for('logout')}}" class="btn btn-danger text-white btns">Fazer Logout</a>
         </div>
     </div>
 {% endblock %}

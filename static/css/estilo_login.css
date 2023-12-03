@@ -45,10 +45,24 @@ body {
 }
 
 
+.pai__botoes {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
 .btns {
     background-color: var(--cor-secundaria);
     width: 100%;
     color: var(--cor-principal);
     font-size: 18px;
     font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.btns:hover {
+    color: var(--cor-preta);
 }

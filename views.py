@@ -11,9 +11,10 @@ def index():
 def jogos():
     
     lista = Jogos.query.order_by(Jogos.id)
+    usuario = Usuarios.query.filter_by(id=1).first()
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
-    return render_template('lista.html',jogos= lista)
+    return render_template('lista.html',jogos= lista, usuario=usuario)
 
 @app.route('/cadastre')
 def cadastro():
@@ -97,12 +98,13 @@ def autenticar():
             proxima_pagina =request.form['proxima']
             return redirect('/jogos')
     flash('Usuário não logado')
-    return redirect(url_for(proxima_pagina))
+    return redirect(url_for('login'))
        
 #===== Função que faz o logout da sessão do usuário =====
 @app.route('/logout')
 def logout():
     session['usuario_logado'] = None
+    session.clear()
     flash('Usuário deslogado com sucesso!')
     return redirect(url_for('index'))
 
