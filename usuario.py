@@ -29,11 +29,11 @@ def cadastro_cliente():
 
     novo_usuario = Usuarios(nome=nome, username=username, senha=senha)
     db.session.add(novo_usuario)
-    
+    db.session.commit()
     '''arquivo = request.files['arquivo']
     upload_path_user = app.config['UPLOAD_PATH_USER']
     arquivo.save(f'{upload_path_user}/capa{novo_usuario.id}.jpg')
-    db.session.commit()
+    
     '''
 
     flash('Usuário cadastrado com sucesso!')
@@ -47,7 +47,7 @@ def cadastro_cliente():
 def editar_usuario(id):
     from views import verificação
     verificação('editar_usuario')
-    usuario = Usuarios.query.filter_by(id=id)
+    usuario = Usuarios.query.filter_by(id=id).first()
     return render_template('editar_usuario.html',usuario=usuario)
 
 #---------------- Função que faz a edição do usuário ---------------------
@@ -77,11 +77,11 @@ def deletar_usuario(id):
     return redirect(url_for('index'))
 
 
-'''@app.route('/dados_usuario/<int:id>')  
+@app.route('/dados_usuario/<int:id>')  
 def dados_usuario(id):
     from views import verificação
     verificação('dados_usuario')
     usuario = Usuarios.query.filter_by(id=id).first()
-    return render_template('usuario.html',usuario=usuario)'''
+    return render_template('usuario.html',usuario=usuario)
 
 

@@ -29,26 +29,46 @@
                 <tr>
                     <th>Nome</th>
                     <th>Username</th>
-                    <th></th>
+                    <th>Senha</th>
                 </tr>
             </thead>
             <tbody>
-                {% for jogo in jogos %}
                     <tr>
                         <td>{{usuario.nome}}</td>
                         <td>{{usuario.username}}</td>
-                        <td>
-                            <a class="btn btn-primary bts"  href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
-                            <a class="btn btn-danger bts" href="{{ url_for('deletar_usuario', id=usuario.id) }}">Excluir</a>
-                        </td>
+                        <td>{{usuario.senha}}</td>
                     </tr>
-                {% endfor %}
             </tbody>
-        </table>
+        </table>  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-danger text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aviso!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir sua conta?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary bg-info" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-dark">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>      
         <div class="pai__botoes">
-            <a href="{{ url_for('deletar_usuario', id=usuario.id) }}" class="btns btn bg-info text-white border border-light ">Excluir Conta</a>
+            <button type="button" class="btns btn bg-danger text-white border border-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Excluir Conta
+              </button>
+            
             <a href="{{url_for('editar_usuario', id=usuario.id)}}" class="btn btn-dark btns">Editar Usuário</a>
             <a href="{{url_for('logout')}}" class="btn btn-dark btns">Fazer Logout</a>
         </div>
     </div>
+    <script>
+          
+    </script>
+    inpu
 {% endblock %}

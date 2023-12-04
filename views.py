@@ -15,7 +15,7 @@ def jogos():
     print('AAAAAAAAAAAAAAAAAAAAAAAAAAA', usuario.id)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
-    return render_template('lista.html',jogos= lista, usuario=usuario.id)
+    return render_template('lista.html',jogos= lista, usuario=usuario)
 
 @app.route('/cadastre')
 def cadastro():
