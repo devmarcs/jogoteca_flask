@@ -30,10 +30,11 @@ def cadastro_cliente():
     novo_usuario = Usuarios(nome=nome, username=username, senha=senha)
     db.session.add(novo_usuario)
     
-    arquivo = request.files['arquivo']
+    '''arquivo = request.files['arquivo']
     upload_path_user = app.config['UPLOAD_PATH_USER']
     arquivo.save(f'{upload_path_user}/capa{novo_usuario.id}.jpg')
     db.session.commit()
+    '''
 
     flash('Usuário cadastrado com sucesso!')
     return redirect(url_for('login'))
@@ -46,7 +47,7 @@ def cadastro_cliente():
 def editar_usuario(id):
     from views import verificação
     verificação('editar_usuario')
-    usuario = Usuarios.query.filter_by(id=id).first()
+    usuario = Usuarios.query.filter_by(id=id)
     return render_template('editar_usuario.html',usuario=usuario)
 
 #---------------- Função que faz a edição do usuário ---------------------

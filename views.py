@@ -9,12 +9,13 @@ def index():
 #===== Tela lista de jogos =====
 @app.route('/jogos' )
 def jogos():
-    
+    nome = session['usuario_logado']
     lista = Jogos.query.order_by(Jogos.id)
-    usuario = Usuarios.query.filter_by(id=1).first()
+    usuario = Usuarios.query.filter_by(username=nome).first()
+    print('AAAAAAAAAAAAAAAAAAAAAAAAAAA', usuario.id)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
-    return render_template('lista.html',jogos= lista, usuario=usuario)
+    return render_template('lista.html',jogos= lista, usuario=usuario.id)
 
 @app.route('/cadastre')
 def cadastro():
