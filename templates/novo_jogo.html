@@ -17,18 +17,6 @@
         </div>
 
             <form class="flex-lg-row mx-auto col-6" method="post" action="{{url_for('criado')}}" enctype="multipart/form-data">
-
-                <figure class="img-thumbnail col-md-5">
-                    <img class=" img-fluid" src="{{ url_for('imagem', nome_arquivo='capa_padrao.png') }}" alt="">
-                    <figcaption>
-                        <label class="fileContainer" for="">
-                            Mudar Capa
-                            <div class="form-group">
-                                <input type="file" name="arquivo" id="arquivo" accept=".jpg" required class="form-control">
-                            </div>
-                        </label>
-                    </figcaption>
-                </figure>
                 <div class="form-group">
                     <label for="">Nome do Jogo</label>
                     <input type="text" name="nome" id="" required class="form-control">

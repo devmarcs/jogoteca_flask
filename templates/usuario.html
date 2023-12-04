@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_usuario.html' %}
 
 {% block title %} Meus dados Cadastrais {% endblock %}
 
@@ -62,9 +62,6 @@
             <button type="button" class="btns btn btn-danger text-white border border-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Excluir Conta
               </button>
-            
-            <a href="{{url_for('editar_usuario', id=usuario.id)}}" class="btn btn-dark btns">Editar Usuário</a>
-            <a href="{{url_for('logout')}}" class="btn btn-dark btns">Fazer Logout</a>
         </div>
     </div>
     <script>

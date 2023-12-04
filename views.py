@@ -12,7 +12,6 @@ def jogos():
     nome = session['usuario_logado']
     lista = Jogos.query.order_by(Jogos.id)
     usuario = Usuarios.query.filter_by(username=nome).first()
-    print('AAAAAAAAAAAAAAAAAAAAAAAAAAA', usuario.id)
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
     return render_template('lista.html',jogos= lista, usuario=usuario)
@@ -39,9 +38,10 @@ def criado():
     db.session.add(novo_jogo)
     db.session.commit()
 
-    arquivo = request.files['arquivo']
+    '''arquivo = request.files['arquivo']
     upload_path = app.config['UPLOAD_PATH']
     arquivo.save(f'{upload_path}/capa{novo_jogo.id}.jpg')
+    '''
 
     flash('Jogo cadastrado com sucesso!')
     return redirect(url_for('jogos'))
@@ -96,7 +96,7 @@ def autenticar():
         if request.form['senha'] == usuario.senha:
             session['usuario_logado'] = usuario.username
             flash(f'{usuario.username}   logado com sucesso')
-            proxima_pagina =request.form['proxima']
+            #proxima_pagina =request.form['proxima']
             return redirect('/jogos')
     flash('Usuário não logado')
     return redirect(url_for('login'))
