@@ -95,7 +95,7 @@ def autenticar():
     if usuario:
         if request.form['senha'] == usuario.senha:
             session['usuario_logado'] = usuario.username
-            flash(f'{usuario.username}   logado com sucesso')
+            flash(f'{usuario.username}   logado(a) com sucesso')
             #proxima_pagina =request.form['proxima']
             return redirect('/jogos')
     flash('Usuário não logado')
